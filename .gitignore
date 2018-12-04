@@ -1,2 +1,4 @@
 # Ignore Folder for convenience
-/ignore/*
+/ignore/
+# Jekyll ignore
+_site/

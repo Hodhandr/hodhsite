@@ -1,0 +1,33 @@
+/***** Pagewide/template styling *****/
+html {
+  min-height: 100%;
+}
+
+body {
+  background-color: darkslategray;
+  margin: 0;
+}
+
+/***** Main containers *****/
+.content {
+  background-color: wheat;
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 10px;
+  min-width: 100%;
+}
+@media (min-width: 792px) {
+  .content {
+    margin: 10px auto 10px auto;
+    min-width: 762px;
+    max-width: 1180px;
+    width: 80%;
+  }
+}
+
+/***** Generic utility classes *****/
+.reset {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
