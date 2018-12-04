@@ -2,3 +2,6 @@
 /ignore/
 # Jekyll ignore
 _site/
+
+#Ignore tool folders
+.vscode/
