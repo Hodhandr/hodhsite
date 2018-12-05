@@ -1,33 +1,50 @@
 /***** Pagewide/template styling *****/
 html {
-  min-height: 100%;
+	min-height: 100%;
 }
 
 body {
-  background-color: darkslategray;
-  margin: 0;
+	background-color: darkslategray;
+	margin: 0;
 }
 
 /***** Main containers *****/
 .content {
-  background-color: wheat;
-  border-radius: 3px;
-  padding: 10px;
-  margin-bottom: 10px;
-  min-width: 100%;
+	background-color: wheat;
+	border-radius: 3px;
+	padding: 10px;
+	margin-bottom: 10px;
+	min-width: 100%;
 }
 @media (min-width: 792px) {
-  .content {
-    margin: 10px auto 10px auto;
-    min-width: 762px;
-    max-width: 1180px;
-    width: 80%;
-  }
+	.content {
+		margin: 10px auto 10px auto;
+		min-width: 762px;
+		max-width: 1180px;
+		width: 80%;
+	}
 }
 
 /***** Generic utility classes *****/
 .reset {
-  margin: 0;
-  padding: 0;
-  border: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+/***** Button styling *****/
+button,
+.btn {
+	cursor: pointer;
+	border: solid 1px black;
+	border-radius: 5px;
+	padding: 3px;
+}
+
+/***** Used for 404 handling in the SPA *****/
+.not-found {
+	display: none;
+}
+.not-found ~ .not-found {
+	display: block;
 }

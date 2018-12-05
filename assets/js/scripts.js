@@ -1,8 +1,7 @@
-/** Container class for main HodhSite script */
-class HodhScript {
+/******************** Classes ********************/
+/** Class for handling routing */
+class Router {
 	constructor() {
-		console.log("JS file loaded!");
-
 		this.pageOut = document.getElementById("page-out");
 
 		if (typeof this.pageOut === "undefined") {
@@ -12,7 +11,39 @@ class HodhScript {
 			return;
 		}
 
-		this.loadPage("home");
+		//Listener for manual page navigation
+		window.addEventListener(
+			"popstate",
+			event => {
+				this.onNavigate();
+			},
+			false
+		);
+
+		this.onNavigate();
+	}
+
+	/** Used to navigate to a new page */
+	navigate(pgName) {
+		history.pushState(null, "", `?p=${pgName}`);
+		//Signal that we're done
+		this.onNavigate();
+	}
+
+	/** To be called after navigation  */
+	onNavigate() {
+		const route = this.getRouteFromUrl();
+		this.loadPage(route);
+	}
+
+	/** Grabs the route from the query string (?p=route) */
+	getRouteFromUrl() {
+		const queryString = new URLSearchParams(window.location.search);
+		let route = queryString.get("p");
+		if (!route) {
+			route = "home";
+		}
+		return route;
 	}
 
 	/** Loads page by name. */
@@ -21,18 +52,22 @@ class HodhScript {
 		if (!fetchRes.ok) {
 			console.error(
 				"HodhScript.loadPage failed for",
-				pgName,
+				`"${pgName}",`,
 				"expected a string to a valid page."
 			);
+			this.pageOut.classList.add("not-found");
 			return;
 		}
+		this.pageOut.classList.remove("not-found");
 		this.pageOut.innerHTML = await fetchRes.text();
 	}
 }
-//Create instance
-const hodhScript = new HodhScript();
 
+/******************** Functions ********************/
 /** Awaitable (promise-ified) 'setTimeout(milliseconds)' */
 function wait(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+/******************** Initialize stuff ********************/
+const router = new Router();
